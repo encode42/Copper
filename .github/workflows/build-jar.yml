@@ -17,7 +17,7 @@ jobs:
         with:
           token: ${{secrets.github_token}}
           
-      - run: echo "::set-env name=name::${{ steps.projectName.outputs.name }}_${{ steps.buildNumber.outputs.build_number }}"
+      - run: echo "::set-output name=name::${{ steps.projectName.outputs.name }}_${{ steps.buildNumber.outputs.build_number }}"
         id: outputName
 
       - name: Set up JDK 14 (x64)
