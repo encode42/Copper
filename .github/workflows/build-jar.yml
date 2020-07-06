@@ -9,14 +9,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - run: echo "::set-env name=project::EncodedAPI"
+      - run: echo "::set-output name=project::EncodedAPI"
+        id: projectName
       
       - uses: einaregilsson/build-number@v2
         id: buildNumber
         with:
           token: ${{secrets.github_token}}
           
-      - run: echo "::set-env name=output::$project_${{ steps.buildNumber.outputs.build_number }}"
+      - run: echo "::set-env name=name::${{ steps.projectName.outputs.name }}_${{ steps.buildNumber.outputs.build_number }}"
+        id: outputName
 
       - name: Set up JDK 14 (x64)
         uses: actions/setup-java@v1
@@ -27,10 +29,10 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - run: mv target/artifact.jar "target/$output"
+      - run: mv target/artifact.jar "target/${{ steps.outputName.outputs.name }}"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: $output
-          path: target/$output.jar
+          name: ${{ steps.outputName.outputs.name }}
+          path: target/${{ steps.outputName.outputs.name }}.jar
