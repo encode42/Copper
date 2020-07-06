@@ -10,6 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Generate Build Number
+        id: buildNumber
         uses: einaregilsson/build-number@v2
         with:
           token: ${{secrets.github_token}}
@@ -26,11 +27,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: EncodedAPI_$BUILDNUMBER
+          name: EncodedAPI_${{ steps.buildNumber.outputs.build_number }}
           path: target/artifact.jar
-
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: EncodedAPI_$BUILDNUMBER
-          path: jar/
