@@ -23,7 +23,7 @@ jobs:
           path: target/
 
       - name: Download Artifact
-      - uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v2
         with:
           name: EncodedAPI
           path: jar/
