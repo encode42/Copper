@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - run: echo "::set-output name=project::EncodedAPI"
+      - run: echo "::set-output name=name::EncodedAPI"
         id: projectName
       
       - uses: einaregilsson/build-number@v2
