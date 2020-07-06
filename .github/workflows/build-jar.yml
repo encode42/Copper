@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: EncodedAPI_$BUILDNUMBER
-          path: target/*.jar
+          path: target/artifact.jar
 
       - name: Download Artifact
         uses: actions/download-artifact@v2

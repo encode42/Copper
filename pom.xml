@@ -19,6 +19,7 @@
     <url>https://encode42.dev/projects/EncodedAPI</url>
 
     <build>
+        <finalName>artifact</finalName>
         <defaultGoal>clean package</defaultGoal>
         <plugins>
             <plugin>
