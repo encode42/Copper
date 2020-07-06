@@ -23,9 +23,16 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean package
-        
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: EncodedAPI_${{ steps.buildNumber.outputs.build_number }}
           path: target/artifact.jar
+
+      - name: Publish artifact
+        uses: skx/github-action-publish-binaries@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: EncodedAPI_${{ steps.buildNumber.outputs.build_number }}
