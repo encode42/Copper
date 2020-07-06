@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - run: echo Project name: $project_name
+      - run: echo "Project name: $project_name"
         id: projectName
         env:
           project_name: EncodedAPI
@@ -19,7 +19,7 @@ jobs:
         with:
           token: ${{secrets.github_token}}
           
-      - run: echo Output file: $output_file
+      - run: echo "Output file: $output_file"
         id: outputFile
         env:
           output_file: ${{ steps.projectName.outputs.project_name }}_${{ steps.buildNumber.outputs.build_number }}
