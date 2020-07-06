@@ -9,11 +9,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Generate Build Number
+      - run: echo Project name: $project_name
+        id: projectName
+        env:
+          project_name: EncodedAPI
+      
+      - uses: einaregilsson/build-number@v2
         id: buildNumber
-        uses: einaregilsson/build-number@v2
         with:
           token: ${{secrets.github_token}}
+          
+      - run: echo Output file: $output_file
+        id: outputFile
+        env:
+          output_file: ${{ steps.projectName.outputs.project_name }}_${{ steps.buildNumber.outputs.build_number }}
 
       - name: Set up JDK 14 (x64)
         uses: actions/setup-java@v1
@@ -24,8 +33,10 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
+      - run: mv target/artifact.jar "target/${{ steps.outputFile.outputs.output_file }}"
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: EncodedAPI_${{ steps.buildNumber.outputs.build_number }}
-          path: target/artifact.jar
+          name: ${{ steps.outputFile.outputs.output_file }}
+          path: target/${{ steps.outputFile.outputs.output_file }}.jar
