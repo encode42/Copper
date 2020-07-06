@@ -8,15 +8,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - run: echo "::set-output name=name::EncodedAPI"
         id: projectName
-      
+
       - uses: einaregilsson/build-number@v2
         id: buildNumber
         with:
           token: ${{secrets.github_token}}
-          
+
       - run: echo "::set-output name=name::${{ steps.projectName.outputs.name }}_${{ steps.buildNumber.outputs.build_number }}"
         id: outputName
 
@@ -40,4 +40,3 @@ jobs:
         run: mvn -B deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
