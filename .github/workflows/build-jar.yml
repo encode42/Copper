@@ -27,7 +27,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: EncodedAPI_${{ steps.buildNumber.outputs.build_number }}
+          name: EncodedAPI_${{ steps.buildNumber.outputs.build_number }}.jar
           path: target/artifact.jar
 
       - name: Publish artifact
@@ -35,4 +35,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: EncodedAPI_${{ steps.buildNumber.outputs.build_number }}
+          args: EncodedAPI_${{ steps.buildNumber.outputs.build_number }}.jar
