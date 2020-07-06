@@ -36,3 +36,8 @@ jobs:
         with:
           name: ${{ steps.outputName.outputs.name }}
           path: target/${{ steps.outputName.outputs.name }}.jar
+      - name: Publish package
+        run: mvn -B deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
