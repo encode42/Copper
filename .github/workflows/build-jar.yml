@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Generate Build Number
-      - uses: einaregilsson/build-number@v2
+        uses: einaregilsson/build-number@v2
         with:
           token: ${{secrets.github_token}}
 
@@ -24,7 +24,7 @@ jobs:
         run: mvn clean package
         
       - name: Upload Artifact
-      - uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v1
         with:
           name: EncodedAPI_$BUILDNUMBER
           path: target/*.jar
