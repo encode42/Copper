@@ -67,8 +67,17 @@ public class Utils {
         return message;
     }
 
-    // ## Online players
+    // ## Players
+    // Check if a player is online
     public static boolean isOnline(String player) {
         return plugin.getServer().getPlayer(player) != null;
+    }
+
+    // Convert object to player
+    public static Player getPlayer(Object objectPlayer) {
+        String player = String.valueOf(objectPlayer);
+
+        if (isOnline(player)) return plugin.getServer().getPlayer(player);
+        return null;
     }
 }
