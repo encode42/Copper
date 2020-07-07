@@ -4,13 +4,19 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class Utils {
+    private static Plugin plugin;
     private static Logger log;
-    public Utils(Logger log) {Utils.log = log;}
+
+    public Utils(Plugin plugin) {
+        Utils.plugin = plugin;
+        Utils.log = plugin.getLogger();
+    }
 
     // ## Translate color codes to chat-compatible colors
     public static String toChat(String message) {
@@ -59,5 +65,10 @@ public class Utils {
     // ## Placeholders (This is W.I.P.)
     public static String replacePlaceholders(String message) {
         return message;
+    }
+
+    // ## Online players
+    public static boolean isOnline(String player) {
+        return plugin.getServer().getPlayer(player) != null;
     }
 }
