@@ -47,9 +47,9 @@ public class Utils {
         options.putIfAbsent("toChat", true);
 
         // Colors, placeholders, prefix
+        if (options.get("prefix") != null && sender instanceof Player) message = options.get("prefix") + message;
         if ((Boolean) options.get("placeholders"))                  message = replacePlaceholders(message);
         if ((Boolean) options.get("toChat"))                        message = toChat(message);
-        if (options.get("prefix") != null && sender instanceof Player) message = options.get("prefix") + message;
 
         // Send the player/log the message
         if (sender instanceof Player) sender.sendMessage(message);
