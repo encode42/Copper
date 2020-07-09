@@ -45,6 +45,8 @@ jobs:
           path: target/${{ steps.outputName.outputs.name }}.jar
 
   publish:
+    runs-on: ubuntu-latest
+
     steps:
       - name: Publish package
         run: mvn -B deploy
