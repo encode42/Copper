@@ -63,8 +63,16 @@ public class Utils {
     }
 
     // ## Placeholders (This is W.I.P.)
-    public static String replacePlaceholders(String message) {
+    public static String replacePlaceholders(String message, HashMap<String, String> customPlaceholders) {
+        if (customPlaceholders != null) {
+            for (HashMap.Entry<String, String> entry : customPlaceholders.entrySet()) {
+                message = message.replace(entry.getKey(), entry.getValue());
+            };
+        }
         return message;
+    }
+    public static String replacePlaceholders(String message) {
+        return replacePlaceholders(message, null);
     }
 
     // ## Players
