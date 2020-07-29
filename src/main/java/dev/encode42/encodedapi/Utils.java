@@ -20,6 +20,7 @@ public class Utils {
 
     // ## Translate color codes to chat-compatible colors
     public static String toChat(String message) {
+        if (message == null) message = "null";
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
@@ -66,7 +67,13 @@ public class Utils {
     public static String replacePlaceholders(String message, HashMap<String, String> customPlaceholders) {
         if (customPlaceholders != null) {
             for (HashMap.Entry<String, String> entry : customPlaceholders.entrySet()) {
-                message = message.replace(entry.getKey(), entry.getValue());
+                String key = entry.getKey();
+                String value = entry.getValue();
+
+                if (key == null) key = "null";
+                if (value == null) value = "null";
+
+                message = message.replace(key, value);
             };
         }
         return message;
