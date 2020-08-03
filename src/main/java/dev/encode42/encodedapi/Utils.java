@@ -20,7 +20,9 @@ public class Utils {
 
     // ## Translate color codes to chat-compatible colors
     public static String toChat(String message) {
+        // Null checking
         if (message == null) message = "null";
+
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
@@ -41,7 +43,7 @@ public class Utils {
 
     // ## Send message to sender
     public static void sendMessage(CommandSender sender, String message, HashMap options) {
-        // Defaults (null checking)
+        // Defaults (Null checking)
         options.putIfAbsent("message", "Message not defined.");
         options.putIfAbsent("severity", "info");
         options.putIfAbsent("placeholders", false);
@@ -49,8 +51,8 @@ public class Utils {
 
         // Colors, placeholders, prefix
         if (options.get("prefix") != null && sender instanceof Player) message = options.get("prefix") + message;
-        if ((Boolean) options.get("placeholders"))                  message = replacePlaceholders(message);
-        if ((Boolean) options.get("toChat"))                        message = toChat(message);
+        if ((Boolean) options.get("placeholders"))                     message = replacePlaceholders(message);
+        if ((Boolean) options.get("toChat"))                           message = toChat(message);
 
         // Send the player/log the message
         if (sender instanceof Player) sender.sendMessage(message);
@@ -67,6 +69,7 @@ public class Utils {
     public static String replacePlaceholders(String message, HashMap<String, String> customPlaceholders) {
         if (customPlaceholders != null) {
             for (HashMap.Entry<String, String> entry : customPlaceholders.entrySet()) {
+                // Null checking
                 String key = entry.getKey();
                 String value = entry.getValue();
 
