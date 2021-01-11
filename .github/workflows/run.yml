@@ -31,5 +31,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: build_${{ matrix.java }}
+        name: build_Java${{ matrix.java }}
         path: target/*.jar
