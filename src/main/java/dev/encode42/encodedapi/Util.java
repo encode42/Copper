@@ -20,6 +20,9 @@ public class Util {
 	 */
 	public static void setPlugin(Plugin plugin) {
 		Util.plugin = plugin;
+
+		// Create the message audience
+		Message.create(plugin);
 	}
 
 	/**
