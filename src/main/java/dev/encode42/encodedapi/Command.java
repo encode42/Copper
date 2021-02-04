@@ -24,7 +24,7 @@ public class Command {
 	 * @param plugin The plugin instance
 	 * @param commands Commands to parse
 	 */
-	public static void run(Plugin plugin, Object ...commands) {
+	public static void register(Plugin plugin, Object ...commands) {
 		Logger log = plugin.getLogger();
 
 		// Coordinator and mapper
