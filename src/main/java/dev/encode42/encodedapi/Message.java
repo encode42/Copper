@@ -37,11 +37,8 @@ public class Message {
 	 * @return The converted component
 	 */
 	private static Component convert(String string) {
-		// Convert legacy color codes
-		string = ChatColor.translateAlternateColorCodes('&', string);
-
 		// Convert MiniMessage syntax
-		return miniMessage.parse(string);
+		return miniMessage.parse(ChatColor.translateAlternateColorCodes('&', string));
 	}
 
 	/**

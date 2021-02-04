@@ -2,39 +2,31 @@ package dev.encode42.encodedapi;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.Plugin;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.stream.Collectors;
 
-/*
-TODO:
-- Seems like non-copy configurations may not be working
-- Long term: Defaults and migrations
- */
+// TODO: Defaults and migrations
 public class Config {
 	private FileConfiguration config;
-	private final boolean isCopy;
-
-	private final Plugin plugin     = Util.plugin;
-	private final File pluginFolder = plugin.getDataFolder();
-
-	private final String filename;
 	private final File file;
+	private final String name;
+	private final boolean isCopy;
 
 	/**
 	 * Configuration file manager
 	 * @param filename Name of the file
 	 * @param copy Make a copy
-	 * - Copies do not remove comments
-	 * - Copies disable all set/save methods
+	 * - Does not remove comments
+	 * - Disables all set/save methods
 	 */
 	public Config(String filename, boolean copy) {
-		this.filename = filename;
-		this.file     = Util.toFile(filename + ".yml");
-		this.isCopy   = copy;
+		this.file   = Util.toFile(filename + ".yml");
+		this.name   = filename;
+		this.isCopy = copy;
 
 		// Create and load the config
 		create();
@@ -53,56 +45,42 @@ public class Config {
 
 	/**
 	 * Create the configuration file
+	 * @param force Force creation of the file
 	 */
-	private void create() {
+	private void create(boolean force) {
+		if (!force && file.exists()) return;
+
 		try {
-			// Make the plugin directory
-			if (!pluginFolder.exists()) pluginFolder.mkdir();
+			// Create the file
+			Util.createFile(file, force);
 
 			// Copy the config
 			if (this.isCopy) {
-				copy();
+				// Get the resource
+				BufferedReader resource = new BufferedReader(Util.getResource(name));
+
+				// Write the file
+				Util.writeFile(file.getName(), resource.lines().collect(Collectors.joining()), true);
+
+				resource.close();
 				return;
 			}
 
-			// Create the file
-			if (!file.exists()) file.createNewFile();
-			else return;
-
 			// Save the config
-			load();
 			save();
 		} catch(IOException e) {
 			Error.fileReadWriteError(file, e);
 		}
+
+		load();
 	}
 
 	/**
-	 * Create a the configuration as a copy
-	 * Disables save/set methods
+	 * Create the configuration file
+	 * Overload that defaults force to false
 	 */
-	private void copy() {
-		try {
-			// Get the resource
-			Reader resource = Util.getResource(filename);
-
-			// Convert the reader to a string
-			BufferedReader reader = new BufferedReader(resource);
-			StringBuilder builder = new StringBuilder();
-			String line;
-
-			while ((line = reader.readLine()) != null)
-				builder.append(line)
-						.append("\n");
-
-			// Write the file
-			Util.writeFile(file.getName(), builder.toString(), false);
-
-			reader.close();
-			resource.close();
-		} catch (IOException e) {
-			Error.fileReadWriteError(file, e);
-		}
+	private void create() {
+		create(false);
 	}
 
 	/**
@@ -150,10 +128,46 @@ public class Config {
 	}
 
 	/**
-	 * Get the config
-	 * @return The configuration file
+	 * Get an object
+	 * @param path Path to get value of
+	 * @return Parsed object
 	 */
-	public FileConfiguration get() {
+	public Object get(String path) {
+		return config.get(path);
+	}
+
+	/**
+	 * Get a string
+	 * @param path Path to get value of
+	 * @return Parsed string
+	 */
+	public String getString(String path) {
+		return config.getString(path);
+	}
+
+	/**
+	 * Get an integer
+	 * @param path Path to get value of
+	 * @return Parsed integer
+	 */
+	public int getInt(String path) {
+		return config.getInt(path);
+	}
+
+	/**
+	 * Get an boolean
+	 * @param path Path to get value of
+	 * @return Parsed boolean
+	 */
+	public boolean getBoolean(String path) {
+		return config.getBoolean(path);
+	}
+
+	/**
+	 * Get the configuration
+	 * @return Config file configuration
+	 */
+	public FileConfiguration getConfig() {
 		return config;
 	}
 
@@ -175,11 +189,11 @@ public class Config {
 	 * Reload the config
 	 * @return The configuration file
 	 */
-	public FileConfiguration reload() {
+	public Config reload() {
 		// Create and load
 		create();
 		load();
 
-		return get();
+		return this;
 	}
 }

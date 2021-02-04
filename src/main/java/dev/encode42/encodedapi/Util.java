@@ -83,6 +83,20 @@ public class Util {
 	}
 
 	/**
+	 * Create a file and its directories
+	 * @param location Location to create
+	 * @param override Override an existing file
+	 * @return Operation success
+	 */
+	public static boolean createFile(File location, boolean override) {
+		// Check if the file exists
+		if (!override && location.exists()) return false;
+
+		// Create the parent directories
+		return location.getParentFile().mkdirs();
+	}
+
+	/**
 	 * Write a string to a file
 	 * @param location Location to write to
 	 * @param contents Contents of the file
@@ -90,11 +104,8 @@ public class Util {
 	 * @return Operation success
 	 */
 	public static boolean writeFile(File location, String contents, boolean override) {
-		// Check if the file exists
-		if (!override && location.exists()) return false;
-
-		// Create the parent directories
-		location.getParentFile().mkdirs();
+		// Create the file
+		createFile(location, override);
 
 		// Write the contents
 		try {

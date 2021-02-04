@@ -4,28 +4,31 @@ import cloud.commandframework.CommandTree;
 import cloud.commandframework.annotations.AnnotationParser;
 import cloud.commandframework.arguments.parser.StandardParameters;
 import cloud.commandframework.bukkit.BukkitCommandManager;
-import cloud.commandframework.bukkit.BukkitCommandMetaBuilder;
 import cloud.commandframework.bukkit.CloudBukkitCapabilities;
 import cloud.commandframework.execution.AsynchronousCommandExecutionCoordinator;
 import cloud.commandframework.execution.CommandExecutionCoordinator;
+import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 
 import java.util.function.Function;
-import java.util.logging.Logger;
 
 public class Command {
 	private static BukkitCommandManager<CommandSender> manager;
 	private static AnnotationParser<CommandSender> annotationParser;
 
+	private static BukkitCommandManager<CommandSender> getManager() {
+		return manager;
+	}
+
 	/**
-	 * Create the command manager and parse commands
+	 * Create the command manager
 	 * @param plugin The plugin instance
-	 * @param commands Commands to parse
 	 */
-	public static void register(Plugin plugin, Object ...commands) {
-		Logger log = plugin.getLogger();
+	public static void create(Plugin plugin) {
+		// Already made
+		if (manager != null) return;
 
 		// Coordinator and mapper
 		Function<CommandTree<CommandSender>, CommandExecutionCoordinator<CommandSender>> coordinator = AsynchronousCommandExecutionCoordinator.<CommandSender>newBuilder().build();
@@ -34,7 +37,7 @@ public class Command {
 		try {
 			manager = new PaperCommandManager<>(plugin, coordinator, mapper, mapper);
 		} catch (Exception e) {
-			log.severe("An error occurred while initializing the command framework. " + e);
+			plugin.getLogger().severe("An error occurred while initializing the command framework. " + e);
 			plugin.getServer().getPluginManager().disablePlugin(plugin);
 		}
 
@@ -43,11 +46,23 @@ public class Command {
 		if (manager.queryCapability(CloudBukkitCapabilities.BRIGADIER)) manager.registerBrigadier();
 
 		// Annotation parser
-		annotationParser = new AnnotationParser<>(manager,
-				CommandSender.class,
-				p -> BukkitCommandMetaBuilder.builder()
-						.withDescription(p.get(StandardParameters.DESCRIPTION, "No description provided."))
-						.build());
+		annotationParser = new AnnotationParser<>(
+			manager,
+			CommandSender.class,
+			p -> CommandMeta.simple()
+				.with(CommandMeta.DESCRIPTION, p.get(StandardParameters.DESCRIPTION, "No description"))
+				.build()
+		);
+	}
+
+	/**
+	 * Register and parse commands
+	 * @param plugin The plugin instance
+	 * @param commands Commands to parse
+	 */
+	public static void register(Plugin plugin, Object ...commands) {
+		// Create the command manager
+		create(plugin);
 
 		// Parse the commands
 		for (Object c : commands) annotationParser.parse(c);
