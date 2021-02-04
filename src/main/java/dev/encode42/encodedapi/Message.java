@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Message {
-	private static String prefix;
+	private static String prefix = "";
 	public static void setPrefix(String prefix) {
 		Message.prefix = prefix;
 	}
