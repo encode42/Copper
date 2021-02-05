@@ -60,7 +60,7 @@ public class Config {
 				BufferedReader resource = new BufferedReader(Util.getResource(name));
 
 				// Write the file
-				Util.writeFile(file.getName(), resource.lines().collect(Collectors.joining()), true);
+				Util.writeFile(file.getName(), resource.lines().collect(Collectors.joining("\n")), true);
 
 				resource.close();
 				return;
