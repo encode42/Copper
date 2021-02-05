@@ -3,6 +3,7 @@ package dev.encode42.encodedapi;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.apache.commons.lang.text.StrSubstitutor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -52,7 +53,7 @@ public class Message {
 		if (audience == null) return;
 
 		// Add prefix and convert to a component
-		Component parsed = convert((raw ? "" : prefix) + string);
+		Component parsed = convert((raw ? "" : prefix) + StrSubstitutor.replace(string, placeholders));
 
 		// Send the message
 		audience.sender(sender).sendMessage(parsed);
@@ -66,7 +67,7 @@ public class Message {
 	 * @param string Message to send
 	 * @param placeholders Map of placeholders
 	 */
-	public static void send(CommandSender sender, String string, HashMap<String, String> placeholders) {
+	public static void send(CommandSender sender, String string, Map<String, String> placeholders) {
 		send(sender, string, false, placeholders);
 	}
 
