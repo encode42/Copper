@@ -7,6 +7,15 @@ import java.net.URI;
 
 public class Error {
 	/**
+	 * Command parsing error
+	 * @param command Command that caused the error
+	 * @param e Exception stack trace
+	 */
+	public static void commandParseError(String command, Exception e) {
+		Message.error("Error parsing command " + command + ": " + ExceptionUtils.getStackTrace(e));
+	}
+
+	/**
 	 * File read/write error
 	 * @param file File that caused the error
 	 * @param e Exception stack trace
