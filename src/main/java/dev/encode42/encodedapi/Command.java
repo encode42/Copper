@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import org.reflections.Reflections;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
 
@@ -62,10 +63,12 @@ public class Command {
 	/**
 	 * Register and parse commands recursively in a package
 	 * @param path Path of commands to parse
+	 * @param registrationClass Class interface to check for
+	 * - Class must be in the same package as the path
 	 */
-	public static void recursiveRegister(String path) {
+	public static void recursiveRegister(String path, Class<? extends Annotation> registrationClass) {
 		Reflections reflections = new Reflections(new String[]{path});
-		for (Class<?> command : reflections.getTypesAnnotatedWith(CommandRegistration.class)) {
+		for (Class<?> command : reflections.getTypesAnnotatedWith(registrationClass)) {
 			try {
 				annotationParser.parse(command.getConstructor().newInstance());
 			} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
