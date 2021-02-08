@@ -65,12 +65,16 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
-            <id>sonatype-oss-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <id>codemc</id>
+            <url>https://repo.codemc.org/repository/maven-public</url>
         </repository>
         <repository>
             <id>jmp-snapshots</id>
             <url>https://repo.jpenilla.xyz/snapshots/</url>
+        </repository>
+        <repository>
+            <id>sonatype-oss-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </repository>
     </repositories>
 
@@ -85,6 +89,12 @@
             <artifactId>bukkit</artifactId>
             <version>1.15.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>1.8</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>cloud.commandframework</groupId>
