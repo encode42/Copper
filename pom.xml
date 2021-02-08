@@ -44,6 +44,10 @@
                             <pattern>net.kyori</pattern>
                             <shadedPattern>dev.encode42.encodedapi.kyori</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>cloud</pattern>
+                            <shadedPattern>dev.encode42.encodedapi.cloud</shadedPattern>
+                        </relocation>
                     </relocations>
                 </configuration>
                 <executions>
