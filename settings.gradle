@@ -1,0 +1,5 @@
+rootProject.name = "EncodedAPI"
+
+include("bot")
+include("core")
+//include("bukkit")

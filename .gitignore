@@ -1,6 +1,52 @@
-# IntelliJ Files
-/.idea
-*.iml
+# JVM crash related
+core.*
+hs_err_pid*
 
-# Compiled files
-/target
+# Intellij
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# netbeans
+nbproject/
+nbactions.xml
+
+# Gradle
+!gradle-wrapper.jar
+.gradle/
+build/
+*/build/
+
+# we use maven!
+build.xml
+
+# Maven
+log/
+target/
+dependency-reduced-pom.xml
+
+# various other potential build files
+build/
+bin/
+dist/
+manifest.mf
+
+# Mac
+.DS_Store/
+.DS_Store
+
+# vim
+.*.sw[a-p]
+
+# Linux temp files
+*~
+
+# Development files
+/bukkit

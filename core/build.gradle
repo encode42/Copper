@@ -1,0 +1,10 @@
+plugins {
+    id("java")
+}
+
+dependencies {
+    implementation(group: "net.jodah", name: "expiringmap", version: "0.5.9")
+    implementation(group: "me.carleslc.Simple-YAML", name: "Simple-Yaml", version: "1.7.2")
+    testImplementation(group: "org.junit.jupiter", name: "junit-jupiter-api", version: "5.7.0")
+    testRuntimeOnly(group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "5.7.0")
+}

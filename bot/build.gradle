@@ -1,0 +1,20 @@
+plugins {
+    id("java")
+}
+
+repositories {
+    maven {
+        url = "https://m2.dv8tion.net/releases"
+        name = "m2-dv8tion"
+    }
+}
+
+dependencies {
+    implementation(project(":core"))
+    implementation(group: "com.github.Kaktushose", name: "jda-commands", version: "1.1.1")
+    implementation(group: "net.dv8tion", name: "JDA", version: "4.3.0_288") {
+        exclude(module: "opus-java")
+    }
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
