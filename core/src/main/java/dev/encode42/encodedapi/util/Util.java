@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Util {
 	/**
-	 * Check variable equality with more than one comparison
+	 * Check variable equality with more than one comparison.
 	 * @param object Object to check equality for
 	 * @param comparisons Comparisons to make
 	 * @return Object is equal to one or more comparisons
@@ -29,11 +29,11 @@ public class Util {
 	}
 
 	/**
-	 * Generates a seeded random with date
+	 * Generates a seeded random with calendar date methods.
 	 * @param methods Calendar methods to use
 	 * @return Seeded random generator
 	 */
-	public static SeededRandom getSeededRandom(int ...methods) {
+	public static SeededRandom getDatedRandom(int ...methods) {
 		// Calendar defaults
 		Calendar calendar = Calendar.getInstance();
 		if (methods.length == 0) {
@@ -53,8 +53,7 @@ public class Util {
 	}
 
 	/**
-	 * Generate a biased random number
-	 * Lower-end weighted
+	 * Generate a lower-end weighted random number.
 	 * @param random Random instance to generate with
 	 * @param max Maximum number
 	 * @param bias Amount of bias

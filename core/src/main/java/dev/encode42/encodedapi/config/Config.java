@@ -16,7 +16,7 @@ public class Config {
 	private final String resourceName;
 
 	/**
-	 * Configuration file manager
+	 * Configuration file manager.
 	 * @param fileName Name of the file
 	 * @param resourceName Name or path to copy from
 	 */
@@ -32,7 +32,7 @@ public class Config {
 	}
 
 	/**
-	 * Configuration file manager
+	 * Configuration file manager.
 	 * @param filename Name or path to save to
 	 */
 	public Config(String filename) {
@@ -40,7 +40,7 @@ public class Config {
 	}
 
 	/**
-	 * Create the configuration file
+	 * Create the configuration file.
 	 * @param override Force creation of the file
 	 * @return Whether or not the file was created
 	 */
@@ -72,8 +72,7 @@ public class Config {
 	}
 
 	/**
-	 * Create the configuration file
-	 * Overload that defaults force to false
+	 * Create the configuration file.
 	 * @return Whether or not the file was created
 	 */
 	private boolean create() {
@@ -81,8 +80,7 @@ public class Config {
 	}
 
 	/**
-	 * Save the configuration
-	 * Disabled if the configuration is a copy
+	 * Save the in-memory configuration changes.
 	 * @return Whether or not the file successfully saved
 	 */
 	public boolean save() {
@@ -97,7 +95,7 @@ public class Config {
 	}
 
 	/**
-	 * Load the configuration from a reader
+	 * Load the configuration from a resource reader.
 	 * @param reader Reader to load
 	 * @return This config instance
 	 */
@@ -115,7 +113,7 @@ public class Config {
 	}
 
 	/**
-	 * Load the configuration from a file
+	 * Load the configuration from a file.
 	 * @param file The file to load
 	 * @return This config instance
 	 */
@@ -125,7 +123,7 @@ public class Config {
 	}
 
 	/**
-	 * Load the configuration from a file
+	 * Load the configuration from the default file.
 	 * @return This config instance
 	 */
 	public Config load() {
@@ -133,61 +131,61 @@ public class Config {
 	}
 
 	/**
-	 * Check if the config has a path
-	 * @param path Path to check existence of
-	 * @return Whether or not the path exists
+	 * Check if the config has a key,
+	 * @param key Key to check existence of
+	 * @return Whether or not the key exists
 	 */
-	public boolean has(String path) {
-		return config.contains(path);
+	public boolean has(String key) {
+		return config.contains(key);
 	}
 
 	/**
-	 * Get an object from a path
-	 * @param path Path to get value of
+	 * Get an object from a key.
+	 * @param key Key to get value of
 	 * @return Returned object
 	 */
-	public Object get(String path) {
-		return config.get(path);
+	public Object get(String key) {
+		return config.get(key);
 	}
 
 	/**
-	 * Get a string from a path
-	 * @param path Path to get value of
+	 * Get a string from a key.
+	 * @param key Key to get value of
 	 * @return Returned string
 	 */
-	public String getString(String path) {
-		return config.getString(path);
+	public String getString(String key) {
+		return config.getString(key);
 	}
 
 	/**
-	 * Get an integer from a path
-	 * @param path Path to get value of
+	 * Get an integer from a key.
+	 * @param key Key to get value of
 	 * @return Returned integer
 	 */
-	public int getInt(String path) {
-		return config.getInt(path);
+	public int getInt(String key) {
+		return config.getInt(key);
 	}
 
 	/**
-	 * Get an boolean from a path
-	 * @param path Path to get value of
+	 * Get an boolean from a key.
+	 * @param key Key to get value of
 	 * @return Returned boolean
 	 */
-	public boolean getBoolean(String path) {
-		return config.getBoolean(path);
+	public boolean getBoolean(String key) {
+		return config.getBoolean(key);
 	}
 
 	/**
-	 * Get a list from a path
-	 * @param path Path to get value of
+	 * Get a list from a key.
+	 * @param key Key to get value of
 	 * @return Returned list
 	 */
-	public List<?> getList(String path) {
-		return config.getList(path);
+	public List<?> getList(String key) {
+		return config.getList(key);
 	}
 
 	/**
-	 * Get the configuration instance
+	 * Get the YamlFile configuration instance.
 	 * @return Config file instance
 	 */
 	public YamlFile getConfig() {
@@ -195,10 +193,18 @@ public class Config {
 	}
 
 	/**
-	 * Set configuration values
-	 * Disabled if the configuration is a copy
-	 * @param key Path to set
-	 * @param value Value to set the path to
+	 * Get the result of a query, return key if non-existent.
+	 * @param key Key to get value of
+	 * @return Returned string or key
+	 */
+	public String getReturn(String key) {
+		return this.has(key) ? this.getString(key) : key;
+	}
+
+	/**
+	 * Set a configuration key's value.
+	 * @param key Key to set
+	 * @param value Value to set the key to
 	 */
 	public void set(String key, Object value) {
 		config.set(key, value);

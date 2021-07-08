@@ -6,7 +6,7 @@ import java.nio.file.Path;
 
 public class IO {
 	/**
-	 * Create a file and its directories
+	 * Create a file and its parent directories.
 	 * @param location Location to create
 	 * @param override Override an existing file
 	 * @return Operation success
@@ -31,7 +31,7 @@ public class IO {
 	}
 
 	/**
-	 * Create a file and its directories
+	 * Create a file and its parent directories.
 	 * @param location Location to create
 	 * @return Operation success
 	 */
@@ -40,7 +40,7 @@ public class IO {
 	}
 
 	/**
-	 * Write a string to a file
+	 * Write a string of any size to a new or existing file.
 	 * @param location Location to write to
 	 * @param contents Contents of the file
 	 * @param override Override an existing file
@@ -64,7 +64,7 @@ public class IO {
 	}
 
 	/**
-	 * Write a string to a file
+	 * Write a string of any size to a new or existing file.
 	 * @param location Location to write to
 	 * @param contents Contents of the file
 	 * @return Operation success
@@ -74,7 +74,7 @@ public class IO {
 	}
 
 	/**
-	 * Write a string to a file
+	 * Write a string of any size to a new or existing file.
 	 * @param location Location to write to
 	 * @param contents Contents of the file
 	 * @param override Override an existing file
@@ -86,7 +86,7 @@ public class IO {
 	}
 
 	/**
-	 * Write a string to a file
+	 * Write a string of any size to a new or existing file.
 	 * @param location Location to write to
 	 * @param contents Contents of the file
 	 * @return Operation success
@@ -96,7 +96,7 @@ public class IO {
 	}
 
 	/**
-	 * Convert a location to a file
+	 * Convert a string location to a file
 	 * @param location The location to convert
 	 * @param root Use the server directory instead of plugin directory
 	 * @return Location converted to a file
@@ -106,7 +106,7 @@ public class IO {
 	}
 
 	/**
-	 * Convert a location to a file
+	 * Convert a string location to a file
 	 * @param location The location to convert
 	 * @return The location converted to a file
 	 */
@@ -115,7 +115,7 @@ public class IO {
 	}
 
 	/**
-	 * Convert a location to a path
+	 * Convert a string location to a path
 	 * @param location The location to convert
 	 * @param root Use the server directory instead of plugin directory
 	 * @return Location converted to a path
@@ -125,7 +125,7 @@ public class IO {
 	}
 
 	/**
-	 * Convert a location to a path
+	 * Convert a string location to a path
 	 * @param location The location to convert
 	 * @return Location converted to a path
 	 */
@@ -134,7 +134,7 @@ public class IO {
 	}
 
 	/**
-	 * Get a resource from the plugin's JAR
+	 * Get a resource from the program's JAR file
 	 * @param resourceName The resource's path
 	 * @return The requested resource
 	 */

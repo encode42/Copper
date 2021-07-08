@@ -9,6 +9,11 @@ public class SeededRandom extends Random {
 		this.seed = seed;
 	}
 
+	/**
+	 * Gets the seed of this random number generator.
+	 * @see SeededRandom#setSeed
+	 * @return Stored seed of this instance
+	 */
 	public long getSeed() {
 		return this.seed;
 	}

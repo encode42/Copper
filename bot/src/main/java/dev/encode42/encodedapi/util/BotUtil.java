@@ -46,7 +46,7 @@ public class BotUtil extends Util {
 	 * @return Seeded random generator
 	 */
 	public static Random getSeededRandom(Member member, int ...methods) {
-		SeededRandom random = Util.getSeededRandom(methods);
+		SeededRandom random = Util.getDatedRandom(methods);
 		long seed = random.getSeed();
 
 		// Make the random instance

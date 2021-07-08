@@ -2,10 +2,11 @@ package dev.encode42.encodedapi.util;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.Collections;
 
 public class Constants {
 	/**
-	 * An empty InputStream
+	 * An empty InputStream.
 	 */
 	public static final InputStream emptyStream = new InputStream() {
 		@Override
@@ -15,7 +16,7 @@ public class Constants {
 	};
 
 	/**
-	 * An empty File
+	 * An empty File.
 	 */
 	public static final File emptyFile = new File("");
 }
