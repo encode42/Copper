@@ -1,6 +1,6 @@
-package dev.encode42.encodedapi.config;
+package dev.encode42.copper.config;
 
-import dev.encode42.encodedapi.util.IO;
+import dev.encode42.copper.util.IO;
 import org.simpleyaml.configuration.file.YamlFile;
 
 import java.io.BufferedReader;

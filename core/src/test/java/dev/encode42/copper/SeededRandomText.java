@@ -1,12 +1,12 @@
-package dev.encode42.encodedapi;
+package dev.encode42.copper;
 
-import dev.encode42.encodedapi.util.SeededRandom;
+import dev.encode42.copper.util.SeededRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SeededRandomText {
     @Test
-    public void testSeededRandom() throws Exception {
+    public void testSeededRandom() {
         SeededRandom random = new SeededRandom(42);
 
         Assertions.assertEquals(-1170105035, random.nextInt());

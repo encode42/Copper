@@ -1,4 +1,4 @@
-package dev.encode42.encodedapi.util;
+package dev.encode42.copper.util;
 
 import java.io.File;
 import java.io.InputStream;

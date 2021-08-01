@@ -1,4 +1,4 @@
-rootProject.name = "EncodedAPI"
+rootProject.name = "Copper"
 
 include("bot")
 include("core")

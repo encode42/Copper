@@ -1,4 +1,4 @@
-package dev.encode42.encodedapi.util;
+package dev.encode42.copper.util;
 
 import java.util.Calendar;
 import java.util.Random;

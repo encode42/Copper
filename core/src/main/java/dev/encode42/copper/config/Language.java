@@ -1,6 +1,5 @@
-package dev.encode42.encodedapi.config;
+package dev.encode42.copper.config;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.logging.Level;

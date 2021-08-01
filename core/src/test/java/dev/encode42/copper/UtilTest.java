@@ -1,6 +1,6 @@
-package dev.encode42.encodedapi;
+package dev.encode42.copper;
 
-import dev.encode42.encodedapi.util.Util;
+import dev.encode42.copper.util.Util;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
