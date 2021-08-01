@@ -5,9 +5,9 @@ import net.dv8tion.jda.api.JDA;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 
-public class JDAListener extends Listener {
+public class JDAListenerHelper extends ListenerHelper {
     private final JDA jda;
-    public JDAListener(String listenerPackage, Class<? extends Annotation> listenerClass, JDA jda) {
+    public JDAListenerHelper(String listenerPackage, Class<? extends Annotation> listenerClass, JDA jda) {
         super(listenerPackage, listenerClass);
         this.jda = jda;
     }

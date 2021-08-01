@@ -6,7 +6,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
-public class Listener {
+public class ListenerHelper {
     private final String listenerPackage;
     private final Class<? extends Annotation> listenerClass;
 
@@ -15,7 +15,7 @@ public class Listener {
      * @param listenerPackage Package to scan for classes
      * @param listenerClass Annotation class to check
      */
-    public Listener(String listenerPackage, Class<? extends Annotation> listenerClass) {
+    public ListenerHelper(String listenerPackage, Class<? extends Annotation> listenerClass) {
         this.listenerPackage = listenerPackage;
         this.listenerClass = listenerClass;
     }
