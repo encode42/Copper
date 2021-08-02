@@ -97,7 +97,7 @@ public class Language extends Config {
      * @param placeholders Replacement strings (in order)
      * @return Parsed language value
      */
-    private String read(String key, Object ...placeholders) {
+    public String read(String key, Object ...placeholders) {
         String value = this.getReturn(key);
         String prefix = "%";
 
