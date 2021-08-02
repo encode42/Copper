@@ -6,10 +6,11 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 
 public class JDAListenerHelper extends ListenerHelper {
-    private final JDA jda;
-    public JDAListenerHelper(String listenerPackage, Class<? extends Annotation> listenerClass, JDA jda) {
-        super(listenerPackage, listenerClass);
-        this.jda = jda;
+    private static JDA jda;
+
+    public static void register(String listenerPackage, Class<? extends Annotation> listenerClass, JDA jda) {
+        register(listenerPackage, listenerClass);
+        JDAListenerHelper.jda = jda;
     }
 
     private void run(Class<?> clazz) throws InstantiationException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
