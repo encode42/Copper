@@ -11,7 +11,7 @@ public class ListenerHelper {
      * Registers all listeners annotated with the Listener interface.
      * @author YouHaveTrouble
      */
-    protected static void register(String listenerPackage, Class<? extends Annotation> listenerClass) {
+    public static void register(String listenerPackage, Class<? extends Annotation> listenerClass) {
         // Find all listener packages
         Reflections reflections = new Reflections((Object) new String[]{listenerPackage});
         Set<Class<?>> listeners = reflections.getTypesAnnotatedWith(listenerClass);
