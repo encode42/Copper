@@ -1,11 +1,12 @@
 plugins {
-    id "java"
+    id("java")
 }
 
-group "dev.encode42"
-version "2.0-SNAPSHOT"
+group = "dev.encode42"
+version = "2.0-SNAPSHOT"
+description = "Java API held together by tape"
 
-allprojects {
+subprojects {
     repositories {
         mavenCentral()
         maven {

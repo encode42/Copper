@@ -1,5 +1,4 @@
 rootProject.name = "Copper"
 
-include("bot")
-include("core")
+include("bot", "core")
 //include("bukkit")
