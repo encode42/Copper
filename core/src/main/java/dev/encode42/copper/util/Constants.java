@@ -2,7 +2,6 @@ package dev.encode42.copper.util;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.Collections;
 
 public class Constants {
 	/**

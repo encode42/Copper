@@ -42,7 +42,7 @@ public class Config {
 	/**
 	 * Create the configuration file.
 	 * @param override Force creation of the file
-	 * @return Whether or not the file was created
+	 * @return Whether the file was created
 	 */
 	private boolean create(boolean override) {
 		// Check if the file exists
@@ -73,7 +73,7 @@ public class Config {
 
 	/**
 	 * Create the configuration file.
-	 * @return Whether or not the file was created
+	 * @return Whether the file was created
 	 */
 	private boolean create() {
 		return create(false);
@@ -81,7 +81,7 @@ public class Config {
 
 	/**
 	 * Save the in-memory configuration changes.
-	 * @return Whether or not the file successfully saved
+	 * @return Whether the file successfully saved
 	 */
 	public boolean save() {
 		try {
@@ -133,7 +133,7 @@ public class Config {
 	/**
 	 * Check if the config has a key,
 	 * @param key Key to check existence of
-	 * @return Whether or not the key exists
+	 * @return Whether the key exists
 	 */
 	public boolean has(String key) {
 		return config.contains(key);
@@ -167,7 +167,7 @@ public class Config {
 	}
 
 	/**
-	 * Get an boolean from a key.
+	 * Get a boolean from a key.
 	 * @param key Key to get value of
 	 * @return Returned boolean
 	 */
