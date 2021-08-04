@@ -104,15 +104,9 @@ public class OmniLogger {
      * @param message Message to log
      */
     public static void log(Level level, String message) {
-        //todo: util.isallequal
-        //todo: javalog
-        if (logger == null && slf == null) {
-            return;
-        }
-
         switch (primary) {
             case "java":
-                logger.log(level, message);
+                javaLog(level, message);
                 break;
 
             case "slf":
@@ -146,11 +140,28 @@ public class OmniLogger {
     }
 
     /**
+     * Method used to log with levels and Java.
+     * @param level Level to log at
+     * @param message Message to log
+     */
+    private static void javaLog(Level level, String message) {
+        if (logger == null) {
+            return;
+        }
+
+        logger.log(level, message);
+    }
+
+    /**
      * Method used to log with levels and SLF4J.
      * @param level Level to log at
      * @param message Message to log
      */
     private static void slfLog(Level level, String message) {
+        if (slf == null) {
+            return;
+        }
+
         switch (level.getName()) {
             case "INFO":
                 slf.info(message);
