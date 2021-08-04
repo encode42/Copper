@@ -18,11 +18,13 @@ public class UtilTest {
         Assertions.assertFalse(Util.isEqual(testNumber, 7, 8, 9));
     }
 
+    // todo
     @Test
     public void datedRandomTest() {
 
     }
 
+    // todo
     @Test
     public void biasedRandomTest() {
 

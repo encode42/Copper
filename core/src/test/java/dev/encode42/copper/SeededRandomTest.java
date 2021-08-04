@@ -4,7 +4,7 @@ import dev.encode42.copper.util.SeededRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class SeededRandomText {
+public class SeededRandomTest {
     @Test
     public void testSeededRandom() {
         SeededRandom random = new SeededRandom(42);
