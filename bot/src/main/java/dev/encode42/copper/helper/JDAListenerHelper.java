@@ -1,13 +1,12 @@
 package dev.encode42.copper.helper;
 
-import dev.encode42.copper.logger.OmniLogger;
 import net.dv8tion.jda.api.JDA;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 
 public class JDAListenerHelper extends ListenerHelper {
-    private JDA jda;
+    private final JDA jda;
 
     public JDAListenerHelper(String listenerPackage, Class<? extends Annotation> listenerClass, JDA jda, boolean register) {
         super(listenerPackage, listenerClass, false);

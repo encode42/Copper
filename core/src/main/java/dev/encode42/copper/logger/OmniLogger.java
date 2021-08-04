@@ -1,7 +1,5 @@
 package dev.encode42.copper.logger;
 
-import dev.encode42.copper.util.Util;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

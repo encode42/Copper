@@ -23,9 +23,9 @@ public abstract class ListenerHelper extends AbstractListenerHelper {
 }
 
 abstract class AbstractListenerHelper {
-    String listenerPackage;
-    Class<? extends Annotation> listenerClass;
-    Set<Class<?>> listeners = new HashSet<>();
+    final String listenerPackage;
+    final Class<? extends Annotation> listenerClass;
+    final Set<Class<?>> listeners = new HashSet<>();
 
     /**
      * Registers all listeners annotated with the Listener interface.
