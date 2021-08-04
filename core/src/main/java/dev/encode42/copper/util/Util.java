@@ -10,20 +10,34 @@ public class Util {
 	 * @param comparisons Comparisons to make
 	 * @return Object is equal to one or more comparisons
 	 */
-	public static boolean isEqual(Object object, Object ...comparisons) {
+	public static boolean isEqualSome(Object object, Object ...comparisons) {
+		return isEqual(false, object, comparisons);
+	}
+
+	public static boolean isEqualAll(Object object, Object ...comparisons) {
+		return isEqual(true, object, comparisons);
+	}
+
+	public static boolean isEqual(boolean all, Object object, Object ...comparisons) {
 		// Get the instance for specific comparisons
 		String type = object == null ? "null" : object.getClass().getSimpleName();
 
 		// Loop through each comparison
 		boolean valid = false;
 		for (Object comparison : comparisons) {
-			if (valid) break;
+			boolean equal = type.equals("String") && object.equals(comparison) || object == comparison;
 
-			if (type.equals("String")) valid = object.equals(comparison);
-			else valid = object == comparison;
+			if (!equal && all) {
+				break;
+			}
+
+			if (equal && !all) {
+				valid = true;
+				break;
+			}
 		}
 
-		return valid;
+		return all != valid;
 	}
 
 	/**
