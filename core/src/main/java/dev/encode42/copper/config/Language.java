@@ -46,10 +46,10 @@ public class Language extends Config {
     }
 
     /**
-     * Log a message to the logger.
+     * Log with a level.
      * @param level Level to log at
-     * @param key Message or key to read and process
-     * @param placeholders Placeholders to replace
+     * @param key Key to get and log
+     * @param placeholders Placeholders to parse
      */
     public void log(Level level, String key, Object ...placeholders) {
         String message = this.read(key, placeholders);
@@ -57,29 +57,63 @@ public class Language extends Config {
     }
 
     /**
-     * Log a message to the logger.
-     * @param key Message or key to read and process
-     * @param placeholders Placeholders to replace
-     */
-    public void log(String key, Object ...placeholders) {
-        this.log(Level.INFO, key, placeholders);
-    }
-
-    /**
-     * Log a message to the logger.
+     * Log with a level.
      * @param level Level to log at
-     * @param key Message or key to read and process
+     * @param key Key to get and log
      */
     public void log(Level level, String key) {
         this.log(level, key, Collections.EMPTY_MAP);
     }
 
     /**
-     * Log a message to the logger.
-     * @param key Message or key to read and process
+     * Informational log.
+     * @param key Key to get and log
+     * @param placeholders Placeholders to parse
      */
-    public void log(String key) {
-        this.log(key, Collections.EMPTY_MAP);
+    public void info(String key, Object ...placeholders) {
+        this.log(Level.INFO, key, placeholders);
+    }
+
+    /**
+     * Informational log.
+     * @param key Key to get and log
+     */
+    public void info(String key) {
+        this.info(key, Collections.EMPTY_MAP);
+    }
+
+    /**
+     * Warning log.
+     * @param key Key to get and log
+     * @param placeholders Placeholders to parse
+     */
+    public void warn(String key, Object ...placeholders) {
+        this.log(Level.WARNING, key, placeholders);
+    }
+
+    /**
+     * Warning log.
+     * @param key Key to get and log
+     */
+    public void warn(String key) {
+        this.warn(key, Collections.EMPTY_MAP);
+    }
+
+    /**
+     * Severe log.
+     * @param key Key to get and log
+     * @param placeholders Placeholders to parse
+     */
+    public void error(String key, Object ...placeholders) {
+        this.log(Level.SEVERE, key, placeholders);
+    }
+
+    /**
+     * Severe log.
+     * @param key Key to get and log
+     */
+    public void error(String key) {
+        this.error(key, Collections.EMPTY_MAP);
     }
 
     /**
@@ -99,8 +133,10 @@ public class Language extends Config {
             }
 
             // Iterate placeholders
-            for (int i = 0; i < placeholders.length; i++) {
-                value = value.replace(prefix + (i + 1), String.valueOf(placeholders[i]));
+            if (placeholders.length > 0) {
+                for (int i = 0; i < placeholders.length; i++) {
+                    value = value.replace(prefix + (i + 1), String.valueOf(placeholders[i]));
+                }
             }
         }
 

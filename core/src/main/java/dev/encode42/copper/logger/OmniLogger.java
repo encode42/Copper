@@ -1,5 +1,6 @@
 package dev.encode42.copper.logger;
 
+import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -104,6 +105,10 @@ public class OmniLogger {
      * @param message Message to log
      */
     public static void log(Level level, String message) {
+        if (primary == null) {
+            return;
+        }
+
         switch (primary) {
             case "java":
                 javaLog(level, message);
@@ -137,6 +142,40 @@ public class OmniLogger {
      */
     public static void error(String message) {
         log(Level.SEVERE, message);
+    }
+
+    /**
+     * Create a stack trace via the primary logger.
+     * @param level Level to log at
+     * @param message Message to log
+     */
+    public static void trace(Level level, String message) {
+        PrintStream stream;
+        switch (level.getName()) {
+            case "SEVERE":
+                stream = System.err;
+                break;
+
+            default:
+                stream = System.out;
+        }
+
+        new StackTrace(message).printStackTrace(stream);
+    }
+
+    /**
+     * Create a stack trace via the primary logger.
+     * @param message Message to log
+     */
+    public static void trace(String message) {
+        trace(Level.INFO, message);
+    }
+
+    /**
+     * Create a stack trace via the primary logger.
+     */
+    public static void trace() {
+        trace(Level.INFO, "");
     }
 
     /**
