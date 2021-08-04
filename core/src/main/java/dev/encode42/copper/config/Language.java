@@ -1,39 +1,30 @@
 package dev.encode42.copper.config;
 
+import dev.encode42.copper.logger.OmniLogger;
+
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Language extends Config {
-    private Logger logger;
-    private Map<String, Object> globals;
+    private Map<String, Object> globals = new HashMap<>();
 
     /**
      * Language configuration file manager.
      * @param fileName Name of the file
      * @param resourceName Name or path to copy from
      */
-    public Language(String fileName, String resourceName, Logger logger) {
+    public Language(String fileName, String resourceName) {
         super(fileName, resourceName);
-        this.logger = logger;
     }
 
     /**
      * Language configuration file manager.
      * @param fileName Name of the file
      */
-    public Language(String fileName, Logger logger) {
-        this(fileName, fileName, logger);
-    }
-
-    /**
-     * Set the logger utilized by {@link Language#log(String)}.
-     * @see Language#log(String)
-     * @param logger Logger to set
-     */
-    public void setLogger(Logger logger) {
-        this.logger = logger;
+    public Language(String fileName) {
+        this(fileName, fileName);
     }
 
     /**
@@ -62,7 +53,7 @@ public class Language extends Config {
      */
     public void log(Level level, String key, Object ...placeholders) {
         String message = this.read(key, placeholders);
-        this.logger.log(level, message);
+        OmniLogger.log(level, message);
     }
 
     /**
