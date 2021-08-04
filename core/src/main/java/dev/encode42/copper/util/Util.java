@@ -11,10 +11,8 @@ public class Util {
 	 * @return Object is equal to one or more comparisons
 	 */
 	public static boolean isEqual(Object object, Object ...comparisons) {
-		if (object == null) return false;
-
 		// Get the instance for specific comparisons
-		String type = object.getClass().getSimpleName();
+		String type = object == null ? "null" : object.getClass().getSimpleName();
 
 		// Loop through each comparison
 		boolean valid = false;
