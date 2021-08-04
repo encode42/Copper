@@ -63,8 +63,8 @@ public class Config {
 
 			resource.close();
 			reader.close();
-		} catch(IOException e) {
-			// todo: erroring
+		} catch (IOException e) {
+			e.printStackTrace();
 			return false;
 		}
 
