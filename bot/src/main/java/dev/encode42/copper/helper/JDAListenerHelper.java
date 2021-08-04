@@ -26,18 +26,4 @@ public class JDAListenerHelper extends ListenerHelper {
     protected void run(Class<?> clazz) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         jda.addEventListener(clazz.getConstructor().newInstance());
     }
-
-    /*
-    private static JDA jda;
-
-    public static void register(String listenerPackage, Class<? extends Annotation> listenerClass, JDA jda) {
-        register(listenerPackage, listenerClass);
-        JDAListenerHelper.jda = jda;
-    }
-
-    protected static void run(Class<?> clazz) throws InstantiationException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        System.out.println(clazz.getSimpleName());
-        jda.addEventListener(clazz.getConstructor().newInstance());
-    }
-    */
 }
