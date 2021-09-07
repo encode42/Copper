@@ -1,6 +1,8 @@
 package dev.encode42.copper.util;
 
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 public class Util {
@@ -74,5 +76,20 @@ public class Util {
 	public static int biasedRandom(Random random, int max, int bias) {
 		double value = Math.pow(random.nextDouble(), bias);
 		return (int)(value * max);
+	}
+
+	/**
+	 * Parse a string to a list.
+	 * @param string String to parse
+	 * @return List parsed from string
+	 */
+	public static List<String> parseList(String string) {
+		if (string == null) {
+			return Constants.EMPTY_STRING_LIST;
+		}
+
+		return Arrays.stream(string.split("\\[|, |]"))
+				.filter(entry -> !entry.isEmpty())
+				.toList();
 	}
 }
