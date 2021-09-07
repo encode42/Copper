@@ -110,13 +110,8 @@ public class OmniLogger {
         }
 
         switch (primary) {
-            case "java":
-                javaLog(level, message);
-                break;
-
-            case "slf":
-                slfLog(level, message);
-                break;
+            case "java" -> javaLog(level, message);
+            case "slf" -> slfLog(level, message);
         }
     }
 
@@ -152,12 +147,8 @@ public class OmniLogger {
     public static void trace(Level level, String message) {
         PrintStream stream;
         switch (level.getName()) {
-            case "SEVERE":
-                stream = System.err;
-                break;
-
-            default:
-                stream = System.out;
+            case "SEVERE" -> stream = System.err;
+            default -> stream = System.out;
         }
 
         new StackTrace(message).printStackTrace(stream);
@@ -202,17 +193,9 @@ public class OmniLogger {
         }
 
         switch (level.getName()) {
-            case "INFO":
-                slf.info(message);
-                break;
-
-            case "WARNING":
-                slf.warn(message);
-                break;
-
-            case "SEVERE":
-                slf.error(message);
-                break;
+            case "INFO" -> slf.info(message);
+            case "WARNING" -> slf.warn(message);
+            case "SEVERE" -> slf.error(message);
         }
     }
 }
