@@ -46,6 +46,3 @@ manifest.mf
 
 # Linux temp files
 *~
-
-# Development files
-/bukkit
