@@ -47,4 +47,40 @@ public class BotUtil extends Util {
 	public static JDA getJda() {
 		return jda;
 	}
+
+	/**
+	 * Get a Discord-formatted date that embeds in a message.
+	 * @param time Time to create the embed
+	 * @param flag Flags to create the embed with
+	 * @return Formatted date embed
+	 */
+	public static String formatTimestamp(long time, TimestampFlags flag) {
+		return "<t:" + time + ":" + flag.getFormat() + ">";
+	}
+
+	/**
+	 * Get a Discord-formatted date that embeds in a message.
+	 * @param time Time to create the embed
+	 * @return Formatted date embed
+	 */
+	public static String formatTimestamp(long time) {
+		return formatTimestamp(time, TimestampFlags.LONG_DATE_TIME);
+	}
+
+	/**
+	 * Get a Discord-formatted date for the current time that embeds in a message.
+	 * @param flags Flags to create the embed with
+	 * @return Formatted date embed
+	 */
+	public static String formatTimestamp(TimestampFlags flags) {
+		return formatTimestamp(Util.getEpoch(), flags);
+	}
+
+	/**
+	 * Get a Discord-formatted date for the current time that embeds in a message.
+	 * @return Formatted date embed
+	 */
+	public static String formatTimestamp() {
+		return formatTimestamp(Util.getEpoch(), TimestampFlags.LONG_DATE_TIME);
+	}
 }

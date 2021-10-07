@@ -1,9 +1,6 @@
 package dev.encode42.copper.util;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Util {
 	/**
@@ -79,11 +76,11 @@ public class Util {
 	}
 
 	/**
-	 * Parse a string to a list.
+	 * Parse a string formatted as a list to a list object.
 	 * @param string String to parse
 	 * @return List parsed from string
 	 */
-	public static List<String> parseList(String string) {
+	public static List<String> toList(String string) {
 		if (string == null) {
 			return Constants.EMPTY_STRING_LIST;
 		}
@@ -91,5 +88,31 @@ public class Util {
 		return Arrays.stream(string.split("\\[|, |]"))
 				.filter(entry -> !entry.isEmpty())
 				.toList();
+	}
+
+	/**
+	 * Parse a wildcard map to a map with a known key and value.
+	 * @param map Map to parse and convert
+	 * @return Parsed map
+	 */
+	public static Map<String, Object> parseMap(Map<?, ?> map) {
+		Map<String, Object> parsed = new HashMap<>();
+
+		for (Map.Entry<?, ?> entry : map.entrySet()) {
+			parsed.put(String.valueOf(entry.getKey()), entry.getValue());
+		}
+
+		return parsed;
+	}
+
+	/**
+	 * Get the current epoch time.
+	 * @return Current epoch time
+	 */
+	public static long getEpoch() {
+		String ms = String.valueOf(System.currentTimeMillis());
+		String epoch = ms.substring(0, ms.length() - 3);
+
+		return Long.parseLong(epoch);
 	}
 }
