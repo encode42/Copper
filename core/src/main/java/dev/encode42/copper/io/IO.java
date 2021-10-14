@@ -1,4 +1,4 @@
-package dev.encode42.copper.util;
+package dev.encode42.copper.io;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

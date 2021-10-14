@@ -6,6 +6,7 @@ dependencies {
     implementation(group: "org.slf4j", name: "slf4j-api", version: "1.7.32")
     implementation(group: "org.reflections", name: "reflections", version: "0.9.12")
     implementation(group: "me.carleslc.Simple-YAML", name: "Simple-Yaml", version: "1.7.2")
+    implementation(group: "com.fasterxml.jackson.dataformat", name: "jackson-dataformat-yaml", version: "2.12.2")
     testImplementation(group: "org.junit.jupiter", name: "junit-jupiter-api", version: "5.7.2")
     testRuntimeOnly(group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "5.7.2")
 }
