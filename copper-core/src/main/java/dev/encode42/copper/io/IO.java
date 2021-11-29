@@ -96,6 +96,41 @@ public class IO {
 	}
 
 	/**
+	 * Create a folder and its parent directories.
+	 * @param location Location to create
+	 * @param override Override an existing folder
+	 * @return Operation success
+	 */
+	public static boolean createFolder(File location, boolean override) {
+		// Check if the folder exists
+		if (!override && location.exists()) return false;
+
+		// Create the directories
+		boolean created = location.mkdirs();
+
+		// Delete folder contents
+		if (override) {
+			File[] files = location.listFiles();
+			if (files != null) {
+				for (File file : files) {
+					file.delete();
+				}
+			}
+		}
+
+		return created;
+	}
+
+	/**
+	 * Create a folder and its parent directories.
+	 * @param location Location to create
+	 * @return Operation success
+	 */
+	public static boolean createFolder(File location) {
+		return createFolder(location, false);
+	}
+
+	/**
 	 * Convert a string location to a file
 	 * @param location The location to convert
 	 * @param root Use the server directory instead of plugin directory

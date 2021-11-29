@@ -1,0 +1,14 @@
+repositories {
+    maven {
+        url = "https://m2.dv8tion.net/releases"
+        name = "m2-dv8tion"
+    }
+}
+
+dependencies {
+    api(project(":copper-slf4j"))
+    api(group: "com.github.Kaktushose", name: "jda-commands", version: "1.1.1")
+    api(group: "net.dv8tion", name: "JDA", version: "4.4.0_350")
+    testImplementation(group: "org.junit.jupiter", name: "junit-jupiter-api", version: "5.8.1")
+    testRuntimeOnly(group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "5.8.1")
+}

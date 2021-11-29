@@ -5,9 +5,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OmniLogger {
-    private static Logger logger;
-    private static org.slf4j.Logger slf;
-    private static String primary;
+    protected static Logger logger;
+    protected static String printStreamFormat = "[%s] %s";
+    protected static PrintStream printStream;
+    protected static PrintStream errorStream;
+    protected static String primary;
 
     /**
      * Get the utilized Java logger instance.
@@ -18,19 +20,41 @@ public class OmniLogger {
     }
 
     /**
-     * Get the utilized SLF4J logger instance.
-     * @return SLF4J instance
-     */
-    public static org.slf4j.Logger getSlf() {
-        return slf;
-    }
-
-    /**
      * Get the current primary logger string.
      * @return Primary logger
      */
     public static String getPrimary() {
         return primary;
+    }
+
+    /**
+     * Set the utilized output stream
+     * @param logger PrintStream instance
+     * @param primary Whether to set this as the primary logger
+     */
+    public static void setLogger(PrintStream logger, boolean primary) {
+        OmniLogger.printStream = logger;
+
+        if (primary) {
+            setPrimary("printStream");
+        }
+    }
+
+    /**
+     * Set the utilized Java logger instance.
+     * @param logger PrintStream instance
+     */
+    public static void setLogger(PrintStream logger) {
+        setLogger(logger, false);
+    }
+
+    /**
+     * Set the error stream utilized by the PrintStream logger.
+     * Utilizes the default PrintStream logger if not set.
+     * @param errorStream PrintStream instance
+     */
+    public static void setErrorStream(PrintStream errorStream) {
+        OmniLogger.errorStream = errorStream;
     }
 
     /**
@@ -55,40 +79,11 @@ public class OmniLogger {
     }
 
     /**
-     * Set the utilized SLF4J logger instance.
-     * @param slf SLF4J instance
-     * @param primary Whether to set this as the primary logger
-     */
-    public static void setSlf(org.slf4j.Logger slf, boolean primary) {
-        OmniLogger.slf = slf;
-
-        if (primary) {
-            setPrimary("slf");
-        }
-    }
-
-    /**
-     * Set the utilized SLF4J logger instance.
-     * @param slf SLF4J instance
-     */
-    public static void setSlf(org.slf4j.Logger slf) {
-        setSlf(slf, false);
-    }
-
-    /**
      * Set the primary logger to a Java logger instance.
      * @param logger Java logger instance
      */
     public static void setPrimary(Logger logger) {
         setLogger(logger, true);
-    }
-
-    /**
-     * Set the primary logger to an SLF4J logger instance.
-     * @param slf SLF4J instance
-     */
-    public static void setPrimary(org.slf4j.Logger slf) {
-        setSlf(slf, true);
     }
 
     /**
@@ -104,14 +99,14 @@ public class OmniLogger {
      * @param level Level to log at
      * @param message Message to log
      */
-    public static void log(Level level, String message) {
+    public static void log(Level level, Object message) {
         if (primary == null) {
             return;
         }
 
         switch (primary) {
             case "java" -> javaLog(level, message);
-            case "slf" -> slfLog(level, message);
+            case "printStream" -> printStreamLog(level, message);
         }
     }
 
@@ -119,7 +114,7 @@ public class OmniLogger {
      * Informational log via the primary logger.
      * @param message Message to log
      */
-    public static void info(String message) {
+    public static void info(Object message) {
         log(Level.INFO, message);
     }
 
@@ -127,7 +122,7 @@ public class OmniLogger {
      * Warning log via the primary logger.
      * @param message Message to log
      */
-    public static void warn(String message) {
+    public static void warn(Object message) {
         log(Level.WARNING, message);
     }
 
@@ -135,7 +130,7 @@ public class OmniLogger {
      * Severe log via the primary logger.
      * @param message Message to log
      */
-    public static void error(String message) {
+    public static void error(Object message) {
         log(Level.SEVERE, message);
     }
 
@@ -144,21 +139,21 @@ public class OmniLogger {
      * @param level Level to log at
      * @param message Message to log
      */
-    public static void trace(Level level, String message) {
+    public static void trace(Level level, Object message) {
         PrintStream stream;
         switch (level.getName()) {
             case "SEVERE" -> stream = System.err;
             default -> stream = System.out;
         }
 
-        new StackTrace(message).printStackTrace(stream);
+        new StackTrace(String.valueOf(message)).printStackTrace(stream);
     }
 
     /**
      * Create a stack trace via the primary logger.
      * @param message Message to log
      */
-    public static void trace(String message) {
+    public static void trace(Object message) {
         trace(Level.INFO, message);
     }
 
@@ -174,28 +169,35 @@ public class OmniLogger {
      * @param level Level to log at
      * @param message Message to log
      */
-    private static void javaLog(Level level, String message) {
+    private static void javaLog(Level level, Object message) {
         if (logger == null) {
             return;
         }
 
-        logger.log(level, message);
+        logger.log(level, String.valueOf(message));
     }
 
     /**
-     * Method used to log with levels and SLF4J.
+     * Method used to log with levels and PrintStreams.
      * @param level Level to log at
      * @param message Message to log
      */
-    private static void slfLog(Level level, String message) {
-        if (slf == null) {
+    private static void printStreamLog(Level level, Object message) {
+        if (printStream == null) {
             return;
         }
 
-        switch (level.getName()) {
-            case "INFO" -> slf.info(message);
-            case "WARNING" -> slf.warn(message);
-            case "SEVERE" -> slf.error(message);
+        String levelName = level.getName();
+        switch (levelName) {
+            case "INFO", "WARNING" -> printStream.printf(printStreamFormat + "%n", levelName, message);
+            case "SEVERE" -> {
+                if (errorStream != null) {
+                    errorStream.printf(printStreamFormat + "%n", levelName, message);
+                    return;
+                }
+
+                printStream.printf(printStreamFormat + "%n", levelName, message);
+            }
         }
     }
 }
