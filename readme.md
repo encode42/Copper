@@ -1,4 +1,7 @@
 # Copper
-I don't know how to build an API, but I made an attempt anyways.
+Java API held together by tape
 
-Includes code I repeat in many of my Java projects.
+`copper-core`: The main module containing configuration, utilities, and more.  
+`copper-slf4j`: An extension of `copper-core` with SLF4J support.  
+`copper-jda`: Utilities and more for JDA.  
+`copper-bukkit`: Utilities, commands, and more for Bukkit.  
