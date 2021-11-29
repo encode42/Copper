@@ -30,10 +30,12 @@ public class OmniLogger {
     /**
      * Set the utilized output stream
      * @param logger PrintStream instance
+     * @param errorLogger PrintStream instance for error logging
      * @param primary Whether to set this as the primary logger
      */
-    public static void setLogger(PrintStream logger, boolean primary) {
+    public static void setLogger(PrintStream logger, PrintStream errorLogger, boolean primary) {
         OmniLogger.printStream = logger;
+        OmniLogger.errorStream = errorLogger;
 
         if (primary) {
             setPrimary("printStream");
@@ -42,19 +44,19 @@ public class OmniLogger {
 
     /**
      * Set the utilized Java logger instance.
+     * @param errorLogger PrintStream instance for error logging
      * @param logger PrintStream instance
      */
-    public static void setLogger(PrintStream logger) {
-        setLogger(logger, false);
+    public static void setLogger(PrintStream logger, PrintStream errorLogger) {
+        setLogger(logger, errorLogger, false);
     }
 
     /**
-     * Set the error stream utilized by the PrintStream logger.
-     * Utilizes the default PrintStream logger if not set.
-     * @param errorStream PrintStream instance
+     * Set the utilized Java logger instance.
+     * @param logger PrintStream instance
      */
-    public static void setErrorStream(PrintStream errorStream) {
-        OmniLogger.errorStream = errorStream;
+    public static void setLogger(PrintStream logger, boolean primary) {
+        setLogger(logger, logger, false);
     }
 
     /**
