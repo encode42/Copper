@@ -5,7 +5,7 @@ plugins {
 }
 
 allprojects {
-    group = "dev.encode42"
+    group = "dev.encode42.copper"
     version = "2.0-SNAPSHOT"
     description = "Java API held together by tape"
 
