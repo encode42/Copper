@@ -1,6 +1,6 @@
 rootProject.name = "Copper"
 
-include("copper-core", "copper-slf4j", "copper-jda")
+include("copper-bom", "copper-core", "copper-slf4j", "copper-jda")
 
 includeMinecraft("copper-bukkit", "copper-cloud")
 
