@@ -13,7 +13,9 @@ public class CommandListenerHelper extends ListenerHelper {
         super(listenerPackage, listenerClass, false);
         this.annotationParser = annotationParser;
 
-        this.register();
+        if (register) {
+            this.register();
+        }
     }
 
     public CommandListenerHelper(String listenerPackage, Class<? extends Annotation> listenerClass, AnnotationParser<CommandSender> annotationParser) {
