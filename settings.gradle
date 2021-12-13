@@ -1,3 +1,16 @@
 rootProject.name = "Copper"
 
-include("copper-core", "copper-slf4j", "copper-jda", "copper-bukkit")
+include("copper-core", "copper-slf4j", "copper-jda")
+
+includeMinecraft("copper-bukkit", "copper-cloud")
+
+def includeMinecraft(...modules) {
+    for (String module : modules) {
+        includeSubproject(module, file("copper-minecraft/$module"))
+    }
+}
+
+def includeSubproject(module, file) {
+    include(module)
+    project(":$module").setProjectDir(file)
+}
