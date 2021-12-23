@@ -197,4 +197,27 @@ public class IO {
 	public static boolean isType(File file, String type) {
 		return getExtension(file).equals(type);
 	}
+
+	/**
+	 * Get a file's relative directory from a root
+	 * @param root File root
+	 * @param file Target file
+	 * @return String of the file's relative directory
+	 */
+	public static String getRelativeDirectory(File root, File file) {
+		StringBuilder targetPath = new StringBuilder();
+		File currentPath = file.getParentFile();
+
+		try {
+			while (!currentPath.getCanonicalPath().equals(root.getCanonicalPath())) {
+				targetPath.insert(0, File.separator + currentPath.getName());
+				currentPath = currentPath.getParentFile();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return targetPath.toString();
+	}
 }
