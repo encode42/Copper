@@ -4,13 +4,13 @@ include("copper-bom", "copper-core", "copper-slf4j", "copper-jda")
 
 includeMinecraft("copper-bukkit", "copper-cloud")
 
-def includeMinecraft(...modules) {
-    for (String module : modules) {
+fun includeMinecraft(vararg modules: String) {
+    for (module in modules) {
         includeSubproject(module, file("copper-minecraft/$module"))
     }
 }
 
-def includeSubproject(module, file) {
+fun includeSubproject(module: String, file: File) {
     include(module)
-    project(":$module").setProjectDir(file)
+    project(":$module").projectDir = file
 }

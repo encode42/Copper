@@ -100,10 +100,9 @@ public class Config {
 	 * @return This config instance
 	 */
 	public Config load(Reader reader) {
-		config = YamlFile.loadConfiguration(reader);
-
 		// Close the reader
 		try {
+			config = YamlFile.loadConfiguration(() -> reader);
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -118,7 +117,12 @@ public class Config {
 	 * @return This config instance
 	 */
 	public Config load(File file) {
-		config = YamlFile.loadConfiguration(file);
+		try {
+			config = YamlFile.loadConfiguration(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return this;
 	}
 
